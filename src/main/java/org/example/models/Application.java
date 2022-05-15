@@ -2,20 +2,29 @@ package org.example.models;
 
 import java.sql.Date;
 
-public class Response {
-    private int response_id;
+public class Application {
+    private int applicationId;
+    private String email;
     private String text;
     private double price;
     private Date date;
     private String paymentStatus;
     private String progress;
 
-    public int getResponse_id() {
-        return response_id;
+    public int getApplicationId() {
+        return applicationId;
     }
 
-    public void setResponse_id(int response_id) {
-        this.response_id = response_id;
+    public void setApplicationId(int applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getText() {
