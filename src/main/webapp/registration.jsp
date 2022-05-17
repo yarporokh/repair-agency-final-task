@@ -11,6 +11,8 @@
 <style><%@include file="/WEB-INF/css/login.css"%></style>
 </head>
 <body>
+<%@include file="navbar.jsp" %>
+<% if (user != null) response.sendRedirect("profile"); %>
 <div class="login-form">
     <form action="register" method="post">
         <h2 class="text-center">Registration</h2>
