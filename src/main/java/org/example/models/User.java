@@ -7,7 +7,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private String role;
+    private Role role;
     private double balance;
 
     public String getEmail() {
@@ -42,11 +42,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
