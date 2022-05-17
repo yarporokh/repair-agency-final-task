@@ -49,9 +49,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="userApplications">My applications</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="createApplication.jsp">New application</a>
-                </li>
                 <%}%>
             </ul>
         </div>
