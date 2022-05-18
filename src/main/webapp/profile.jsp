@@ -22,8 +22,8 @@
             <li class="list-group-item">Full name: <%= user.getFirstName() %> <%= user.getLastName() %>
             </li>
             <li class="list-group-item">Email: <%= user.getEmail() %>
-                <%if (user.getRole().equals("User")) {%>
             </li>
+            <%if (user.getRole() == Role.USER) {%>
             <li class="list-group-item">Balance: <%= user.getBalance() %> $
             </li>
             <%}%>
