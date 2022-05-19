@@ -11,6 +11,8 @@ public class Application {
     private String paymentStatus;
     private String progress;
 
+    private String servicemanEmail;
+
     public int getApplicationId() {
         return applicationId;
     }
@@ -65,5 +67,66 @@ public class Application {
 
     public void setProgress(String progress) {
         this.progress = progress;
+    }
+
+    public String getServicemanEmail() {
+        return servicemanEmail;
+    }
+
+    public void setServicemanEmail(String servicemanEmail) {
+        this.servicemanEmail = servicemanEmail;
+    }
+
+    public static Application.Builder newBuilder() {
+        return new Application().new Builder();
+    }
+
+    public class Builder {
+        private Builder() {
+        }
+
+        public Application.Builder setApplicationId(int applicationId) {
+            Application.this.applicationId = applicationId;
+            return this;
+        }
+
+        public Application.Builder setEmail(String email) {
+            Application.this.email = email;
+            return this;
+        }
+
+        public Application.Builder setText(String text) {
+            Application.this.text = text;
+            return this;
+        }
+
+        public Application.Builder setPrice(double price) {
+            Application.this.price = price;
+            return this;
+        }
+
+        public Application.Builder setDate(Date date) {
+            Application.this.date = date;
+            return this;
+        }
+
+        public Application.Builder setPaymentStatus(String paymentStatus) {
+            Application.this.paymentStatus = paymentStatus;
+            return this;
+        }
+
+        public Application.Builder setProgress(String progress) {
+            Application.this.progress = progress;
+            return this;
+        }
+
+        public Application.Builder setServicemanEmail(String servicemanEmail) {
+            Application.this.servicemanEmail = servicemanEmail;
+            return this;
+        }
+
+        public Application build() {
+            return Application.this;
+        }
     }
 }

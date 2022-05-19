@@ -70,4 +70,43 @@ public class User {
     public int hashCode() {
         return Objects.hash(email);
     }
+
+    public static Builder newBuilder() {
+        return new User().new Builder();
+    }
+
+    public class Builder {
+        private Builder() {
+        }
+
+        public Builder setEmail(String email) {
+            User.this.email = email;
+            return this;
+        }
+        public Builder setPassword(String password) {
+            User.this.password = password;
+            return this;
+        }
+        public Builder setFirstName(String firstName) {
+            User.this.firstName = firstName;
+            return this;
+        }
+        public Builder setLastName(String lastName) {
+            User.this.lastName = lastName;
+            return this;
+        }
+        public Builder setRole(Role role) {
+            User.this.role = role;
+            return this;
+        }
+        public Builder setBalance(double balance) {
+            User.this.balance = balance;
+            return this;
+        }
+
+
+        public User build() {
+            return User.this;
+        }
+    }
 }
