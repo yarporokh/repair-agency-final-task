@@ -19,6 +19,7 @@ public class ApplicationDAO implements DAO<Application, String>{
 
     public static final String UPDATE = "UPDATE application SET price = ?, payment_status = ?, progress = ?, serviceman_email = ? WHERE application_id = ?";
     public static final String UPDATE_PAYMENT_STATUS = "UPDATE application SET payment_status = ? WHERE application_id = ?";
+    public static final String UPDATE_RESPONSE = "UPDATE application SET response_text = ? WHERE application_id = ?";
 
     @Override
     public void insert(Application application) {
@@ -67,6 +68,7 @@ public class ApplicationDAO implements DAO<Application, String>{
                         .setPaymentStatus(result.getString("payment_status"))
                         .setProgress(result.getString("progress"))
                         .setServicemanEmail(result.getString("serviceman_email"))
+                        .setResponseText(result.getString("response_text"))
                         .build();
                 applicationList.add(application);
             }
@@ -94,6 +96,7 @@ public class ApplicationDAO implements DAO<Application, String>{
                         .setPaymentStatus(result.getString("payment_status"))
                         .setProgress(result.getString("progress"))
                         .setServicemanEmail(result.getString("serviceman_email"))
+                        .setResponseText(result.getString("response_text"))
                         .build();
                 applicationList.add(application);
             }
@@ -107,6 +110,17 @@ public class ApplicationDAO implements DAO<Application, String>{
         try {
             PreparedStatement psmt = getConnection().prepareStatement(UPDATE_PAYMENT_STATUS);
             psmt.setString(1, paymentStatus);
+            psmt.setInt(2, id);
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateApplicationResponseText (int id, String responseText) {
+        try {
+            PreparedStatement psmt = getConnection().prepareStatement(UPDATE_RESPONSE);
+            psmt.setString(1, responseText);
             psmt.setInt(2, id);
             psmt.executeUpdate();
         } catch (SQLException e) {

@@ -33,6 +33,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">Payment status</th>
                 <th scope="col">Progress</th>
+                <th scope="col">Response</th>
             </tr>
             </thead>
             <tbody>
@@ -47,6 +48,7 @@
                     <td>${item.getPrice()}</td>
                     <td>${item.getPaymentStatus()}</td>
                     <td>${item.getProgress()}</td>
+                    <td>${item.getResponseText()}</td>
                 </tr>
 
 

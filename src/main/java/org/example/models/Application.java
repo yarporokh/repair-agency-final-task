@@ -10,8 +10,8 @@ public class Application {
     private Date date;
     private String paymentStatus;
     private String progress;
-
     private String servicemanEmail;
+    private String responseText;
 
     public int getApplicationId() {
         return applicationId;
@@ -76,6 +76,12 @@ public class Application {
     public void setServicemanEmail(String servicemanEmail) {
         this.servicemanEmail = servicemanEmail;
     }
+    public String getResponseText() {
+        return responseText;
+    }
+    public void setResponseText(String responseText) {
+        this.responseText = responseText;
+    }
 
     public static Application.Builder newBuilder() {
         return new Application().new Builder();
@@ -122,6 +128,11 @@ public class Application {
 
         public Application.Builder setServicemanEmail(String servicemanEmail) {
             Application.this.servicemanEmail = servicemanEmail;
+            return this;
+        }
+
+        public Application.Builder setResponseText (String responseText) {
+            Application.this.responseText = responseText;
             return this;
         }
 

@@ -14,7 +14,6 @@ import java.util.List;
 
 import static org.example.service.ApplicationService.getUserApplications;
 import static org.example.service.UserService.getServicemenNamesByEmail;
-import static org.example.service.UserService.updateBalanceAndRole;
 
 @WebServlet("/userApplications")
 public class UserApplicationsServlet extends HttpServlet {

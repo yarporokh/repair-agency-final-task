@@ -2,8 +2,6 @@
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-j
-:src/main/java/org/example/connection/CreateConnection.java,3\2\32b14bdbaf2a41350e11e23a4bed461d43099226
 K
 src/main/webapp/balance.jsp,6\e\6e4a71830b9051b7f58b861dcf679ecf2d827d4a
 P
@@ -16,11 +14,25 @@ I
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 f
 6src/main/java/org/example/servlets/BalanceServlet.java,f\1\f1611ca93de98bd3b613f3b4de85e43a2fd69277
-p
-@src/main/java/org/example/servlets/CreateApplicationServlet.java,e\0\e0b818002d9afdcbe93026c63364577ce17dda3d
 d
 4src/main/java/org/example/servlets/LoginServlet.java,0\b\0b6d168d9c23dfad361931aa2e6f84ca9d2e1b56
 f
 6src/main/java/org/example/servlets/ProfileServlet.java,4\7\470019aa5c0f5e006f14d841c52abc3584d4f701
 K
 src/main/webapp/profile.jsp,3\9\3932b6a22a1db264677b40c5b9307e011739496b
+Z
+*src/main/java/org/example/models/User.java,c\3\c3bf03d3f3212c24e8590b09499a0ef2958aba56
+V
+&src/main/java/org/example/dao/DAO.java,9\e\9e7579e7a0ce9d7d7916fead93495a4c77437eaa
+Z
+*src/main/java/org/example/dao/UserDAO.java,c\6\c6597350f14825d907edc61bd4084ec0fcf71419
+b
+2src/main/java/org/example/service/UserService.java,0\a\0a429d57c61a30e0b0d20ccf1326f3bddfab3779
+d
+4src/main/java/org/example/servlets/UsersServlet.java,f\2\f2d35d8e120ac23fdc163a2aaf0aac700604e458
+i
+9src/main/java/org/example/servlets/UserUpdateServlet.java,9\7\97bdfc8bf8d2653438f438dfd3fec9dc0716cfb0
+O
+src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
+W
+'src/main/webapp/WEB-INF/css/profile.css,d\a\da28a77879c0d30153d0c672dda697aa82482b07

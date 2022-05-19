@@ -68,7 +68,7 @@ public class AllApplicationsServlet extends HttpServlet {
         if (progress == null)
             progress = req.getParameter("default-progress");
 
-        updateApplication(id, price, servicemanEmail, paymentStatus, progress);
+        updateApplication(id, price, servicemanEmail, paymentStatus, progress, "");
         resp.sendRedirect("allApplications");
     }
 }

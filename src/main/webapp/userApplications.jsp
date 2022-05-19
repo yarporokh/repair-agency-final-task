@@ -31,6 +31,7 @@
                 <th>Price</th>
                 <th>Payment status</th>
                 <th>Progress</th>
+                <th>Response</th>
             </tr>
             </thead>
             <tbody>
@@ -53,7 +54,50 @@
                     </td>
                     <td>${item.getPaymentStatus()}</td>
                     <td>${item.getProgress()}</td>
+                    <td>
+                    <c:choose>
+                        <c:when test="${item.getResponseText().equals('') && item.getProgress().equals('Done')}">
+                            <div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#responseModal${item.getApplicationId()}"> Response
+                                </button>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            ${item.getResponseText()}
+                        </c:otherwise>
+                    </c:choose>
+                    </td>
                 </tr>
+
+                <!-- Response Modal -->
+                <div class="modal fade" id="responseModal${item.getApplicationId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="responseModalLabel">Response</h5>
+                                <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="response" method="post">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="resp-text" class="col-form-label">Response text:</label>
+                                            <textarea class="form-control" id="resp-text" name="response-text" rows="7" maxlength=999
+                                                      style="resize: none;" required="required"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="app-id" value="${item.getApplicationId()}">
+                                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Leave response</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </c:forEach>
             </tbody>
         </table>
@@ -63,7 +107,7 @@
 </html>
 
 
-<!-- Modal -->
+<!-- Create Application Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -90,3 +134,5 @@
         </div>
     </div>
 </div>
+
+
