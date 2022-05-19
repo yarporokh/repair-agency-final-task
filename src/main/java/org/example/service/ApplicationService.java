@@ -26,4 +26,24 @@ public class ApplicationService {
     public static List<Application> getUserApplications(String email) {
         return applicationDAO.getByEmail(email);
     }
+
+    public static List<Application> getAllApplications() {
+        return applicationDAO.getAll();
+    }
+
+    public static void updateApplication(int id, double price, String serviceman, String paymentStatus, String progress) {
+        Application application = Application
+                .newBuilder()
+                .setApplicationId(id)
+                .setPrice(price)
+                .setServicemanEmail(serviceman)
+                .setPaymentStatus(paymentStatus)
+                .setProgress(progress)
+                .build();
+        applicationDAO.update(application);
+    }
+
+    public static void updatePaymentStatus(int id) {
+        applicationDAO.updateApplicationPaymentStatus(id, "Paid");
+    }
 }

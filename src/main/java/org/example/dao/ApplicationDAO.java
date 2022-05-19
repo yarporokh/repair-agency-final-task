@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import com.sun.imageio.plugins.jpeg.JPEGStreamMetadataFormat;
 import org.example.models.Application;
 
 import java.sql.PreparedStatement;
@@ -13,13 +14,11 @@ import static org.example.connection.CreateConnection.getConnection;
 public class ApplicationDAO implements DAO<Application, String>{
     private static final String INSERT = "INSERT INTO application (email, text, date, price, payment_status, progress) " +
             "VALUES (?, ?, ?, ?, ?, ?)";
-
     public static final String SELECT_BY_EMAIL = "SELECT * FROM application WHERE email = ?";
+    public static final String GET_ALL = "SELECT * FROM application";
 
-    @Override
-    public Application findEntity(String s) {
-        return null;
-    }
+    public static final String UPDATE = "UPDATE application SET price = ?, payment_status = ?, progress = ?, serviceman_email = ? WHERE application_id = ?";
+    public static final String UPDATE_PAYMENT_STATUS = "UPDATE application SET payment_status = ? WHERE application_id = ?";
 
     @Override
     public void insert(Application application) {
@@ -39,17 +38,43 @@ public class ApplicationDAO implements DAO<Application, String>{
 
     @Override
     public void update(Application application) {
-
-    }
-
-    @Override
-    public void delete(String s) {
-
+        try {
+            PreparedStatement psmt = getConnection().prepareStatement(UPDATE);
+            psmt.setDouble(1, application.getPrice());
+            psmt.setString(2, application.getPaymentStatus());
+            psmt.setString(3, application.getProgress());
+            psmt.setString(4, application.getServicemanEmail());
+            psmt.setInt(5, application.getApplicationId());
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<Application> getAll() {
-        return null;
+        List<Application> applicationList = new ArrayList<>();
+        try {
+            PreparedStatement psmt = getConnection().prepareStatement(GET_ALL);
+            ResultSet result = psmt.executeQuery();
+
+            while (result.next()) {
+                Application application = Application.newBuilder().setApplicationId(result.getInt("application_id"))
+                        .setEmail(result.getString("email"))
+                        .setText(result.getString("text"))
+                        .setDate(result.getDate("date"))
+                        .setPrice(result.getDouble("price"))
+                        .setPaymentStatus(result.getString("payment_status"))
+                        .setProgress(result.getString("progress"))
+                        .setServicemanEmail(result.getString("serviceman_email"))
+                        .build();
+                applicationList.add(application);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return applicationList;
     }
 
 
@@ -61,19 +86,31 @@ public class ApplicationDAO implements DAO<Application, String>{
             ResultSet result = psmt.executeQuery();
 
             while (result.next()) {
-                Application application = new Application();
-                application.setApplicationId(result.getInt("application_id"));
-                application.setEmail(result.getString("email"));
-                application.setText(result.getString("text"));
-                application.setDate(result.getDate("date"));
-                application.setPrice(result.getDouble("price"));
-                application.setPaymentStatus(result.getString("payment_status"));
-                application.setProgress(result.getString("progress"));
+                Application application = Application.newBuilder().setApplicationId(result.getInt("application_id"))
+                        .setEmail(result.getString("email"))
+                        .setText(result.getString("text"))
+                        .setDate(result.getDate("date"))
+                        .setPrice(result.getDouble("price"))
+                        .setPaymentStatus(result.getString("payment_status"))
+                        .setProgress(result.getString("progress"))
+                        .setServicemanEmail(result.getString("serviceman_email"))
+                        .build();
                 applicationList.add(application);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return applicationList;
+    }
+
+    public void updateApplicationPaymentStatus (int id, String paymentStatus) {
+        try {
+            PreparedStatement psmt = getConnection().prepareStatement(UPDATE_PAYMENT_STATUS);
+            psmt.setString(1, paymentStatus);
+            psmt.setInt(2, id);
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
