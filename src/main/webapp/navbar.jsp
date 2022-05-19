@@ -37,7 +37,7 @@
                 </li>
                 <%if (user.getRole() != Role.USER) {%>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">All applications</a>
+                    <a class="nav-link active" aria-current="page" href="allApplications">All applications</a>
                 </li>
                 <%}%>
                 <%if (user.getRole() == Role.MANAGER) {%>
