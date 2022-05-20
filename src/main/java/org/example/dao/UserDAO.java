@@ -3,6 +3,7 @@ package org.example.dao;
 import org.example.models.Role;
 import org.example.models.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,8 +26,11 @@ public class UserDAO implements DAO<User, String> {
 
     @Override
     public void insert(User user) {
+        Connection connection = null;
+        PreparedStatement psmt = null;
         try {
-            PreparedStatement psmt = getConnection().prepareStatement(INSERT);
+            connection = getConnection();
+            psmt = connection.prepareStatement(INSERT);
             psmt.setString(1, user.getEmail());
             psmt.setString(2, user.getPassword());
             psmt.setString(3, user.getFirstName());
@@ -36,13 +40,19 @@ public class UserDAO implements DAO<User, String> {
             psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
         }
     }
 
     @Override
     public void update(User user) {
+        Connection connection = null;
+        PreparedStatement psmt = null;
         try {
-            PreparedStatement psmt = getConnection().prepareStatement(UPDATE_USER);
+            connection = getConnection();
+            psmt = connection.prepareStatement(UPDATE_USER);
             psmt.setString(1, user.getPassword());
             psmt.setString(2, user.getFirstName());
             psmt.setString(3, user.getLastName());
@@ -52,6 +62,9 @@ public class UserDAO implements DAO<User, String> {
             psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
         }
     }
 
@@ -59,8 +72,11 @@ public class UserDAO implements DAO<User, String> {
     @Override
     public List getAll() {
         List<User> users = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement psmt = null;
         try {
-            PreparedStatement psmt = getConnection().prepareStatement(GET_ALL);
+            connection = getConnection();
+            psmt = connection.prepareStatement(GET_ALL);
             ResultSet result = psmt.executeQuery();
             while (result.next()) {
                 User user = User.newBuilder().setEmail(result.getString("email"))
@@ -73,14 +89,20 @@ public class UserDAO implements DAO<User, String> {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
         }
         return users;
     }
 
     public User getLoginedUser(String email, String password) {
         User user = new User();
+        Connection connection = null;
+        PreparedStatement psmt = null;
         try {
-            PreparedStatement psmt = getConnection().prepareStatement(SELECT_LOGINED_USER);
+            connection = getConnection();
+            psmt = connection.prepareStatement(SELECT_LOGINED_USER);
             psmt.setString(1, email);
             psmt.setString(2, password);
 
@@ -100,13 +122,19 @@ public class UserDAO implements DAO<User, String> {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
         }
         return user.getFirstName() != null ? user : null;
     }
 
     public boolean isExist(String email) {
+        Connection connection = null;
+        PreparedStatement psmt = null;
         try {
-            PreparedStatement psmt = getConnection().prepareStatement(IS_EXIST);
+            connection = getConnection();
+            psmt = connection.prepareStatement(IS_EXIST);
             psmt.setString(1, email);
             ResultSet result = psmt.executeQuery();
             while (result.next()) {
@@ -114,25 +142,37 @@ public class UserDAO implements DAO<User, String> {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
         }
         return false;
     }
 
     public void updateRoleAndBalanceByEmail(String email, String role, double balance) {
+        Connection connection = null;
+        PreparedStatement psmt = null;
         try {
-            PreparedStatement psmt = getConnection().prepareStatement(UPDATE_ROLE_AND_BALANCE);
-            psmt.setDouble(1, balance );
+            connection = getConnection();
+            psmt = connection.prepareStatement(UPDATE_ROLE_AND_BALANCE);
+            psmt.setDouble(1, balance);
             psmt.setString(2, role);
             psmt.setString(3, email);
             psmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
         }
     }
 
     public String getFullNamesByEmail(String email) {
+        Connection connection = null;
+        PreparedStatement psmt = null;
         try {
-            PreparedStatement psmt = getConnection().prepareStatement(GET_FULL_NAME_BY_EMAIL);
+            connection = getConnection();
+            psmt = connection.prepareStatement(GET_FULL_NAME_BY_EMAIL);
             psmt.setString(1, email);
             ResultSet result = psmt.executeQuery();
             while (result.next()) {
@@ -141,6 +181,9 @@ public class UserDAO implements DAO<User, String> {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
         }
         return "None";
     }
