@@ -95,7 +95,7 @@
                                         <li class="list-group-item">
                                             Serviceman: ${item.getServicemanEmail()}
                                             <c:choose>
-                                                <c:when test="${u.getRole() == Role.MANAGER && item.getPaymentStatus().equals('Paid')}">
+                                                <c:when test="${u.getRole() == Role.MANAGER && item.getPaymentStatus().equals('Paid') && !item.getProgress().equals('Done')}">
                                                     <select name="change-serviceman">
                                                         <option>${item.getServicemanEmail()}</option>
                                                         <c:forEach items="${emails}" var="em">
