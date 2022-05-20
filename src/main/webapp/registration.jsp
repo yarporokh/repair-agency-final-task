@@ -16,6 +16,11 @@
 <div class="login-form">
     <form action="register" method="post">
         <h2 class="text-center">Registration</h2>
+        <% if (request.getAttribute("regerror") != null) {%>
+        <div class="alert alert-danger" role="alert">
+            <span>Passwords do not match or the user is registered.</span>
+        </div>
+        <%}%>
         <div class="form-group">
             <input type="text" class="form-control" placeholder="First name" name="firstname" required="required" pattern="[A-Z][a-z]+">
         </div>

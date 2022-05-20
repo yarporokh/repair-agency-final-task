@@ -1,5 +1,6 @@
 package org.example.servlets;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import static org.example.service.UserService.loggedUser;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html;charset=UTF-8");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -24,7 +25,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             resp.sendRedirect("profile");
         } else {
-            resp.sendRedirect("login.jsp");
+            req.setAttribute("logerror", 1);
+            getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
     }
 }

@@ -1,6 +1,5 @@
 package org.example.servlets;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,10 +21,10 @@ public class RegisterServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password1 = req.getParameter("password1");
         String password2 = req.getParameter("password2");
-        RequestDispatcher dis = req.getRequestDispatcher("registration.jsp");
 
         if (!password1.equals(password2) || isUserExist(email)) {
-            dis.forward(req, resp);
+            req.setAttribute("regerror", 1);
+            getServletContext().getRequestDispatcher("/registration.jsp").forward(req, resp);
         } else {
             addUser(email, password1, firstName, lastName);
             resp.sendRedirect("login.jsp");
