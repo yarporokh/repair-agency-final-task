@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8"%>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,10 +22,10 @@
         </div>
         <%}%>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="First name" name="firstname" required="required" pattern="[A-Z][a-z]+">
+            <input type="text" class="form-control" placeholder="First name" name="firstname" required="required" pattern="^[A-Z][a-z]+|[А-ЯІЇҐЄ][а-яіїєґ]+$">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Last name" name="lastname" required="required" pattern="[A-Z][a-z]+">
+            <input type="text" class="form-control" placeholder="Last name" name="lastname" required="required" pattern="^[A-Z][a-z]+|[А-ЯІЇҐЄ][а-яіїєґ]+$">
         </div>
         <div class="form-group">
             <input type="email" class="form-control" placeholder="Email" name="email" required="required">
