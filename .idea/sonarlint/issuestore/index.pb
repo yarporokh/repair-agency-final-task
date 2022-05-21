@@ -36,8 +36,6 @@ V
 &src/main/java/org/example/dao/DAO.java,9\e\9e7579e7a0ce9d7d7916fead93495a4c77437eaa
 Z
 *src/main/java/org/example/dao/UserDAO.java,c\6\c6597350f14825d907edc61bd4084ec0fcf71419
-K
-src/main/webapp/profile.jsp,3\9\3932b6a22a1db264677b40c5b9307e011739496b
 o
 ?src/main/java/org/example/servlets/UserApplicationsServlet.java,4\b\4b47b278124d1224fde6cd5ee6434a015b92e5b1
 g
@@ -52,3 +50,13 @@ d
 4src/main/java/org/example/servlets/LoginServlet.java,0\b\0b6d168d9c23dfad361931aa2e6f84ca9d2e1b56
 g
 7src/main/java/org/example/servlets/RegisterServlet.java,e\2\e20076e974eb1ea98d79e5947ee77711ad7498bd
+I
+src/main/webapp/users.jsp,2\7\27a8e25ae3121819d54adfe4e25e0b425d1cf9a7
+J
+src/main/webapp/navbar.jsp,a\7\a7ba207bfa74ca8b935b52012e2659693fd94e87
+P
+ src/main/webapp/registration.jsp,d\d\dd51f7041d5a8d7bb17c79a85099a350e198ae09
+S
+#src/main/webapp/allApplications.jsp,4\f\4fcc000c367e7780b84c5765fb5163494b4c68af
+K
+src/main/webapp/profile.jsp,3\9\3932b6a22a1db264677b40c5b9307e011739496b

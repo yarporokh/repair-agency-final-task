@@ -44,7 +44,7 @@
                     <td>${servicemenNames.get(status.index)}<br/><span
                             style="font-style: italic">Email: ${item.getServicemanEmail()}</span></td>
                     <td>${item.getPrice()} $
-                        <c:if test="${item.getPrice() > 0.0 && !item.getPaymentStatus().equals('Paid')}">
+                        <c:if test="${item.getPrice() > 0.0 && item.getPaymentStatus().equals('Payment expected')}">
                             <form action="pay" method="post">
                                 <input type="hidden" name="id" value="${item.getApplicationId()}">
                                 <input type="hidden" name="price" value="${item.getPrice()}">
