@@ -1,7 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
+    <fmt:bundle basename="i18n">
+        <fmt:message key="users.head" var="head"/>
+        <fmt:message key="users.error" var="error"/>
+        <fmt:message key="users.firstname" var="first_name"/>
+        <fmt:message key="users.lastname" var="last_name"/>
+        <fmt:message key="users.email" var="email"/>
+        <fmt:message key="users.balance" var="balance"/>
+        <fmt:message key="users.role" var="role"/>
+        <fmt:message key="users.modal.head" var="modal_head"/>
+        <fmt:message key="users.modal.fullname" var="modal_fullname"/>
+        <fmt:message key="users.modal.email" var="modal_email"/>
+        <fmt:message key="users.modal.balance" var="modal_balance"/>
+        <fmt:message key="users.modal.role" var="modal_role"/>
+        <fmt:message key="users.modal.button.close" var="modal_b_close"/>
+        <fmt:message key="users.modal.button.save" var="modal_b_save"/>
+    </fmt:bundle>
+
     <title>Users</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <link rel="stylesheet"
@@ -19,17 +39,17 @@
 <jsp:useBean id="userEmail" scope="request" type="java.lang.String"/>
 <c:choose>
     <c:when test="${empty list}">
-        <span>You didn't leave any applications.</span>
+        <span>No registered users.</span>
     </c:when>
     <c:otherwise>
         <table id="userTable" class="table table-hover" style="user-select: none;">
             <thead>
             <tr>
-                <th scope="col">First name</th>
-                <th scope="col">Last name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Role</th>
+                <th scope="col">${first_name}</th>
+                <th scope="col">${last_name}</th>
+                <th scope="col">${email}</th>
+                <th scope="col">${balance}</th>
+                <th scope="col">${role}</th>
             </tr>
             </thead>
             <tbody>
@@ -50,23 +70,22 @@
                         <div class="modal-content">
                             <form action="userUpdate">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">User</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">${modal_head}</h5>
                                     <button type="reset" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Full
-                                            name: ${item.getFirstName()} ${item.getLastName()}
+                                        <li class="list-group-item">${modal_fullname} ${item.getFirstName()} ${item.getLastName()}
                                         </li>
-                                        <li class="list-group-item">Email: ${item.getEmail()}
+                                        <li class="list-group-item">${modal_email} ${item.getEmail()}
                                         </li>
-                                        <li class="list-group-item">Balance:
+                                        <li class="list-group-item">${modal_balance}
                                                 ${item.getBalance()} $
                                             <input type="number" name="add-balance" step="0.01"
                                                    min="${item.getBalance()}" value="${item.getBalance()}">
                                         </li>
-                                        <li class="list-group-item">Role: ${item.getRole()}
+                                        <li class="list-group-item">${modal_role} ${item.getRole()}
                                             <c:if test="${!userEmail.equals(item.getEmail())}">
                                                 <select name="change-role">
                                                     <option>${item.getRole()}</option>
@@ -82,9 +101,9 @@
                                 </div>
                                 <div class="modal-footer">
                                     <input type="hidden" name="email" value="${item.getEmail()}">
-                                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">${modal_b_close}
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="submit" class="btn btn-primary">${modal_b_save}</button>
                                 </div>
                             </form>
                         </div>
@@ -96,7 +115,7 @@
         </table>
     </c:otherwise>
 </c:choose>
-
+<my:footer/>
 </body>
 </html>
 

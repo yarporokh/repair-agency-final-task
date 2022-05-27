@@ -1,6 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
+    <fmt:bundle basename="i18n">
+        <fmt:message key="profile.head" var="head"/>
+        <fmt:message key="profile.fullname" var="fullname"/>
+        <fmt:message key="profile.email" var="email"/>
+        <fmt:message key="profile.balance" var="balance"/>
+        <fmt:message key="profile.role" var="role"/>
+    </fmt:bundle>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Profile</title>
     <link href="css/login.css" rel="stylesheet">
@@ -15,22 +26,23 @@
 </head>
 <body>
 <%@include file="navbar.jsp" %>
-<h2 class="text-center">Profile</h2>
+<h2 class="text-center">${head}</h2>
 <div class="d-flex justify-content-center">
     <div class="card" style="width: 18rem;">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Full name: <%= user.getFirstName() %> <%= user.getLastName() %>
+            <li class="list-group-item">${fullname} <%= user.getFirstName() %> <%= user.getLastName() %>
             </li>
-            <li class="list-group-item">Email: <%= user.getEmail() %>
+            <li class="list-group-item">${email} <%= user.getEmail() %>
             </li>
             <%if (user.getRole() == Role.USER) {%>
-            <li class="list-group-item">Balance: <%= user.getBalance() %> $
+            <li class="list-group-item">${balance} <%= user.getBalance() %> $
             </li>
             <%}%>
-            <li class="list-group-item">Role: <%= user.getRole() %>
+            <li class="list-group-item">${role} <%= user.getRole() %>
             </li>
         </ul>
     </div>
 </div>
+<my:footer/>
 </body>
 </html>
