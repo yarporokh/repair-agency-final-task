@@ -1,6 +1,7 @@
 package org.example.dao;
 
-import com.sun.imageio.plugins.jpeg.JPEGStreamMetadataFormat;
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import org.example.models.Application;
 
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.util.List;
 import static org.example.connection.CreateConnection.getConnection;
 
 public class ApplicationDAO implements DAO<Application, String> {
+    private static final Logger log = LoggerFactory.getLogger(ApplicationDAO.class);
     private static final String INSERT = "INSERT INTO application (email, text, date, price, payment_status, progress) " +
             "VALUES (?, ?, ?, ?, ?, ?)";
     public static final String SELECT_BY_EMAIL = "SELECT * FROM application WHERE email = ?";
@@ -36,7 +38,9 @@ public class ApplicationDAO implements DAO<Application, String> {
             psmt.setString(5, application.getPaymentStatus());
             psmt.setString(6, application.getProgress());
             psmt.executeUpdate();
+            log.debug("Create application ", application.getApplicationId());
         } catch (SQLException e) {
+            log.warn("Can't insert application. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -57,7 +61,9 @@ public class ApplicationDAO implements DAO<Application, String> {
             psmt.setString(4, application.getServicemanEmail());
             psmt.setInt(5, application.getApplicationId());
             psmt.executeUpdate();
+            log.debug("Update application ", application.getApplicationId());
         } catch (SQLException e) {
+            log.warn("Can't update application. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -89,6 +95,7 @@ public class ApplicationDAO implements DAO<Application, String> {
                 applicationList.add(application);
             }
         } catch (SQLException e) {
+            log.warn("Can't get all applications. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -123,6 +130,7 @@ public class ApplicationDAO implements DAO<Application, String> {
                 applicationList.add(application);
             }
         } catch (SQLException e) {
+            log.warn("Can't get by email applications. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -140,7 +148,9 @@ public class ApplicationDAO implements DAO<Application, String> {
             psmt.setString(1, paymentStatus);
             psmt.setInt(2, id);
             psmt.executeUpdate();
+            log.debug("Update application payment status ", id);
         } catch (SQLException e) {
+            log.warn("Can't update application payment status. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -157,7 +167,9 @@ public class ApplicationDAO implements DAO<Application, String> {
             psmt.setString(1, responseText);
             psmt.setInt(2, id);
             psmt.executeUpdate();
+            log.debug("Update application response ", id);
         } catch (SQLException e) {
+            log.warn("Can't update application response. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);

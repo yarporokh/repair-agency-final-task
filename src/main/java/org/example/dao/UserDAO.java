@@ -1,5 +1,7 @@
 package org.example.dao;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import org.example.models.Role;
 import org.example.models.User;
 
@@ -13,6 +15,7 @@ import java.util.List;
 import static org.example.connection.CreateConnection.getConnection;
 
 public class UserDAO implements DAO<User, String> {
+    private static final Logger log = LoggerFactory.getLogger(UserDAO.class);
 
     private static final String INSERT = "INSERT INTO user (email, password, first_name, last_name, balance, role) VALUES (?, ?, ?, ?, ?, ?)";
     public static final String SELECT_LOGINED_USER = "SELECT * FROM user WHERE email = ? AND password = ?";
@@ -38,7 +41,9 @@ public class UserDAO implements DAO<User, String> {
             psmt.setDouble(5, user.getBalance());
             psmt.setString(6, user.getRole().toString());
             psmt.executeUpdate();
+            log.debug("Create user ", user.getEmail());
         } catch (SQLException e) {
+            log.warn("Can't create user. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -60,7 +65,9 @@ public class UserDAO implements DAO<User, String> {
             psmt.setString(5, user.getRole().toString());
             psmt.setString(6, user.getEmail());
             psmt.executeUpdate();
+            log.debug("Update user ", user.getEmail());
         } catch (SQLException e) {
+            log.warn("Can't update user. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -88,6 +95,7 @@ public class UserDAO implements DAO<User, String> {
                 users.add(user);
             }
         } catch (SQLException e) {
+            log.warn("Can't get all users. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -121,6 +129,7 @@ public class UserDAO implements DAO<User, String> {
                         .build();
             }
         } catch (SQLException e) {
+            log.warn("Can't get loggined user. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -141,6 +150,7 @@ public class UserDAO implements DAO<User, String> {
                 return true;
             }
         } catch (SQLException e) {
+            log.warn("Can't get exist user. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -159,7 +169,9 @@ public class UserDAO implements DAO<User, String> {
             psmt.setString(2, role);
             psmt.setString(3, email);
             psmt.executeUpdate();
+            log.debug("Update role and balance for ", email);
         } catch (SQLException e) {
+            log.warn("Can't update role and balance. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
@@ -180,6 +192,7 @@ public class UserDAO implements DAO<User, String> {
                 return fullName;
             }
         } catch (SQLException e) {
+            log.warn("Can't get full name. ", e);
             throw new RuntimeException(e);
         } finally {
             close(connection);
