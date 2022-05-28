@@ -56,7 +56,7 @@
                 <%}%>
                 <%if (user.getRole() == Role.USER) {%>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="userApplications">${n_users}</a>
+                    <a class="nav-link active" aria-current="page" href="userApplications">${n_my_app}</a>
                 </li>
                 <%}%>
             </ul>
