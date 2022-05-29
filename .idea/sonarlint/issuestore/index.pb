@@ -50,3 +50,23 @@ V
 &src/main/java/org/example/dao/DAO.java,9\e\9e7579e7a0ce9d7d7916fead93495a4c77437eaa
 b
 2src/main/java/org/example/service/UserService.java,0\a\0a429d57c61a30e0b0d20ccf1326f3bddfab3779
+n
+>src/main/java/org/example/servlets/AllApplicationsServlet.java,8\c\8cf30e217c90947354a80a6c76015f0e55b28280
+a
+1src/main/java/org/example/dao/ApplicationDAO.java,e\2\e27a8d4e60c2e8184d00896f5de436629880d0ce
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+Z
+*src/main/java/org/example/dao/UserDAO.java,c\6\c6597350f14825d907edc61bd4084ec0fcf71419
+S
+#src/main/webapp/allApplications.jsp,4\f\4fcc000c367e7780b84c5765fb5163494b4c68af
+i
+9src/main/java/org/example/servlets/UserUpdateServlet.java,9\7\97bdfc8bf8d2653438f438dfd3fec9dc0716cfb0
+K
+src/main/webapp/profile.jsp,3\9\3932b6a22a1db264677b40c5b9307e011739496b
+I
+src/main/webapp/login.jsp,8\5\85ee523d01e5e19376db640e846c91bbcb0a1c22
+c
+3src/main/java/org/example/filters/LocaleFilter.java,7\2\72218e355861fa1c9e15aea55a2012dde323ec90
+O
+src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392

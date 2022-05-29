@@ -12,6 +12,7 @@
         <fmt:message key="userapp.id" var="id"/>
         <fmt:message key="userapp.email" var="email"/>
         <fmt:message key="userapp.text" var="text"/>
+        <fmt:message key="userapp.pay" var="pay"/>
         <fmt:message key="userapp.date" var="date"/>
         <fmt:message key="userapp.serviceman" var="serviceman"/>
         <fmt:message key="userapp.price" var="price"/>
@@ -73,7 +74,7 @@
                             <form action="pay" method="post">
                                 <input type="hidden" name="id" value="${item.getApplicationId()}">
                                 <input type="hidden" name="price" value="${item.getPrice()}">
-                                <input class="btn btn-primary" type="submit" value="Pay">
+                                <input class="btn btn-primary" type="submit" value="${pay}">
                             </form>
                         </c:if>
                     </td>
@@ -84,7 +85,7 @@
                         <c:when test="${item.getResponseText().equals('') && item.getProgress().equals('Done')}">
                             <div>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#responseModal${item.getApplicationId()}"> Response
+                                        data-bs-target="#responseModal${item.getApplicationId()}"> ${response}
                                 </button>
                             </div>
                         </c:when>
