@@ -34,7 +34,7 @@
 <body>
 <%@include file="navbar.jsp" %>
 
-<h2 class="text-center">All users</h2>
+<h2 class="text-center">${head}</h2>
 <jsp:useBean id="list" scope="request" type="java.util.List"/>
 <jsp:useBean id="userEmail" scope="request" type="java.lang.String"/>
 <c:choose>

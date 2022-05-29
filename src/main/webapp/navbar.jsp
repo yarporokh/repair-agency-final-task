@@ -33,9 +33,11 @@
                         ${n_menu}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" href="profile"><i class="bi bi-person-circle"></i> ${n_profile}</a></li>
+                        <li><a class="dropdown-item" href="profile"><i class="bi bi-person-circle"></i> ${n_profile}</a>
+                        </li>
                         <%if (user.getRole() == Role.USER) {%>
-                        <li><a class="dropdown-item" href="balance.jsp"><i class="bi bi-cash-stack"></i> ${n_balance}</a>
+                        <li><a class="dropdown-item" href="balance.jsp"><i class="bi bi-cash-stack"></i> ${n_balance}
+                        </a>
                         </li>
                         <%}%>
                         <li>
@@ -62,10 +64,15 @@
             </ul>
         </div>
         <%}%>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="?sessionLocale=en">En</a></li>
-            <li><a href="?sessionLocale=ua">Ua</a></li>
-        </ul>
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-globe2"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="?lang=en">En</a>
+                <a class="dropdown-item" href="?lang=ua">Ua</a>
+            </div>
+        </div>
     </div>
 </nav>
 </html>
