@@ -64,14 +64,11 @@
             </ul>
         </div>
         <%}%>
-        <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-globe2"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="?lang=en">En</a>
-                <a class="dropdown-item" href="?lang=ua">Ua</a>
-            </div>
+        <div>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item list-group-item"><a class="dropdown-item" href="?lang=en">EN</a></li>
+                <li class="list-group-item list-group-item"><a class="dropdown-item" href="?lang=ua">UA</a></li>
+            </ul>
         </div>
     </div>
 </nav>
