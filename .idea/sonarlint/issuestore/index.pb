@@ -8,8 +8,6 @@ Z
 *src/main/java/org/example/models/User.java,c\3\c3bf03d3f3212c24e8590b09499a0ef2958aba56
 d
 4src/main/java/org/example/servlets/UsersServlet.java,f\2\f2d35d8e120ac23fdc163a2aaf0aac700604e458
-W
-'src/main/webapp/WEB-INF/css/profile.css,d\a\da28a77879c0d30153d0c672dda697aa82482b07
 b
 2src/main/java/org/example/servlets/PayServlet.java,4\3\43a2f3faea290bd3ca564f71d849b8354b358202
 a
@@ -42,8 +40,6 @@ K
 src/main/webapp/balance.jsp,6\e\6e4a71830b9051b7f58b861dcf679ecf2d827d4a
 e
 5src/main/java/org/example/filters/EncodingFilter.java,7\6\761e88b1592d6d2c2d604174f196806e4c09cfd8
-P
- src/main/webapp/registration.jsp,d\d\dd51f7041d5a8d7bb17c79a85099a350e198ae09
 i
 9src/main/java/org/example/service/ApplicationService.java,d\a\dacc9e655d4c356e200530348a74729f7dc1479a
 V
@@ -58,14 +54,8 @@ a
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 Z
 *src/main/java/org/example/dao/UserDAO.java,c\6\c6597350f14825d907edc61bd4084ec0fcf71419
-S
-#src/main/webapp/allApplications.jsp,4\f\4fcc000c367e7780b84c5765fb5163494b4c68af
 i
 9src/main/java/org/example/servlets/UserUpdateServlet.java,9\7\97bdfc8bf8d2653438f438dfd3fec9dc0716cfb0
-K
-src/main/webapp/profile.jsp,3\9\3932b6a22a1db264677b40c5b9307e011739496b
-I
-src/main/webapp/login.jsp,8\5\85ee523d01e5e19376db640e846c91bbcb0a1c22
 c
 3src/main/java/org/example/filters/LocaleFilter.java,7\2\72218e355861fa1c9e15aea55a2012dde323ec90
 O
