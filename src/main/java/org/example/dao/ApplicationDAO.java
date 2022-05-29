@@ -1,7 +1,6 @@
 package org.example.dao;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.*;
 import org.example.models.Application;
 
 import java.sql.Connection;
@@ -38,7 +37,7 @@ public class ApplicationDAO implements DAO<Application, String> {
             psmt.setString(5, application.getPaymentStatus());
             psmt.setString(6, application.getProgress());
             psmt.executeUpdate();
-            log.debug("Create application ", application.getApplicationId());
+            log.debug("User {} create application", application.getEmail());
         } catch (SQLException e) {
             log.warn("Can't insert application. ", e);
             throw new RuntimeException(e);
@@ -61,7 +60,7 @@ public class ApplicationDAO implements DAO<Application, String> {
             psmt.setString(4, application.getServicemanEmail());
             psmt.setInt(5, application.getApplicationId());
             psmt.executeUpdate();
-            log.debug("Update application ", application.getApplicationId());
+            log.debug("User {} update application ", application.getEmail());
         } catch (SQLException e) {
             log.warn("Can't update application. ", e);
             throw new RuntimeException(e);
@@ -148,7 +147,7 @@ public class ApplicationDAO implements DAO<Application, String> {
             psmt.setString(1, paymentStatus);
             psmt.setInt(2, id);
             psmt.executeUpdate();
-            log.debug("Update application payment status ", id);
+            log.debug("Update application payment status {}", id);
         } catch (SQLException e) {
             log.warn("Can't update application payment status. ", e);
             throw new RuntimeException(e);
@@ -167,7 +166,7 @@ public class ApplicationDAO implements DAO<Application, String> {
             psmt.setString(1, responseText);
             psmt.setInt(2, id);
             psmt.executeUpdate();
-            log.debug("Update application response ", id);
+            log.debug("Update application response {}", id);
         } catch (SQLException e) {
             log.warn("Can't update application response. ", e);
             throw new RuntimeException(e);

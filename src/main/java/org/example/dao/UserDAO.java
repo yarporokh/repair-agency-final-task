@@ -1,7 +1,6 @@
 package org.example.dao;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.*;
 import org.example.models.Role;
 import org.example.models.User;
 
@@ -41,7 +40,7 @@ public class UserDAO implements DAO<User, String> {
             psmt.setDouble(5, user.getBalance());
             psmt.setString(6, user.getRole().toString());
             psmt.executeUpdate();
-            log.debug("Create user ", user.getEmail());
+            log.debug("Create user {}", user.getEmail());
         } catch (SQLException e) {
             log.warn("Can't create user. ", e);
             throw new RuntimeException(e);
@@ -65,7 +64,7 @@ public class UserDAO implements DAO<User, String> {
             psmt.setString(5, user.getRole().toString());
             psmt.setString(6, user.getEmail());
             psmt.executeUpdate();
-            log.debug("Update user ", user.getEmail());
+            log.debug("Update user {}", user.getEmail());
         } catch (SQLException e) {
             log.warn("Can't update user. ", e);
             throw new RuntimeException(e);
@@ -169,7 +168,7 @@ public class UserDAO implements DAO<User, String> {
             psmt.setString(2, role);
             psmt.setString(3, email);
             psmt.executeUpdate();
-            log.debug("Update role and balance for ", email);
+            log.debug("Update role and balance for {}", email);
         } catch (SQLException e) {
             log.warn("Can't update role and balance. ", e);
             throw new RuntimeException(e);
