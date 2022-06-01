@@ -39,7 +39,7 @@
         </div>
         <%}%>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder=${firstname}" name="firstname" required="required"
+            <input type="text" class="form-control" placeholder="${firstname}" name="firstname" required="required"
                    pattern="^[A-Z][a-z]+|[А-ЯІЇҐЄ][а-яіїєґ]+$">
         </div>
         <div class="form-group">
