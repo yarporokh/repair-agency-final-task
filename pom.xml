@@ -73,7 +73,17 @@
       <version>1.10.19</version>
       <scope>test</scope>
     </dependency>
-
+    <dependency> <!-- Hikari Connection Pool -->
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>2.4.7</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.20.0-GA</version>
+    </dependency>
   </dependencies>
 
   <build>
