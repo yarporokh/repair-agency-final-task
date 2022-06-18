@@ -43,22 +43,45 @@
         <table id="applicationTable" class="table table-hover" style="user-select: none;">
             <thead>
             <tr>
-                <th scope="col">${id}</th>
-                <th scope="col">${email}</th>
-                <th scope="col">${text}</th>
-                <th scope="col">${date}</th>
-                <th scope="col">${serviceman}</th>
-                <th scope="col">${price}</th>
-                <th scope="col">${paument_status}</th>
-                <th scope="col">${progress}</th>
-                <th scope="col">${response}</th>
+                <th scope="col">${id}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="idASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="idDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form></th>
+                <th scope="col">${email}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="emailASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="emailDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form></th>
+                <th scope="col">${text}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="textASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="textDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form></th>
+                <th scope="col">${date}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="dateASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="dateDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form>
+                </th>
+                <th scope="col">${serviceman}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="servicemanASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="servicemanDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form></th>
+                <th scope="col">${price}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="priceASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="priceDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form>
+                </th>
+                <th scope="col">${paument_status}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="pstatusASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="pstatusDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form>
+                </th>
+                <th scope="col">${progress}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="progressASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="progressDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form></th>
+                <th scope="col">${response}
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="responseASC"><button type="submit"><i class="bi bi-arrow-up"></i></button></form>
+                    <form action="sortedApplications"><input type="hidden" name="sortingBy" value="responseDESC"><button type="submit"><i class="bi bi-arrow-down"></i></button></form></th>
             </tr>
             </thead>
             <tbody>
             <c:set var="count" value="0" scope="page"/>
             <c:forEach items="${applicationList}" var="item">
                 <tr data-bs-toggle="modal" data-bs-target="#applicationModal${count}" style="cursor: pointer;">
-                    <td>${item.getApplicationId()}</td>
+                    <td>${item.getApplicationId()}
+                        <form action="post"></form>
+                    </td>
                     <td>${item.getEmail()}</td>
                     <td>${item.getText()}</td>
                     <td>${item.getDate()}</td>
@@ -78,17 +101,17 @@
                             <form action="allApplications" method="post"> <%----%>
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">
-                                        ${modal_head} ${item.getApplicationId()}</h5>
+                                            ${modal_head} ${item.getApplicationId()}</h5>
                                     <button type="reset" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
-                                            ${text}: ${item.getText()}
+                                                ${text}: ${item.getText()}
                                         </li>
                                         <li class="list-group-item">
-                                            ${price}: ${item.getPrice()}
+                                                ${price}: ${item.getPrice()}
                                             <c:if test="${u.getRole() == Role.MANAGER && item.getPrice() == 0.0}">
                                                 <c:if test="${!item.getPaymentStatus().equals('Paid')}">
                                                     <input type="number" name="set-price" step="0.01"
@@ -97,7 +120,7 @@
                                             </c:if>
                                         </li>
                                         <li class="list-group-item">
-                                            ${paument_status}: ${item.getPaymentStatus()}
+                                                ${paument_status}: ${item.getPaymentStatus()}
                                             <c:if test="${u.getRole() == Role.MANAGER}">
                                                 <select name="change-payment-status">
                                                     <option>${item.getPaymentStatus()}</option>
@@ -111,7 +134,7 @@
                                             </c:if>
                                         </li>
                                         <li class="list-group-item">
-                                            ${serviceman}: ${item.getServicemanEmail()}
+                                                ${serviceman}: ${item.getServicemanEmail()}
                                             <c:choose>
                                                 <c:when test="${u.getRole() == Role.MANAGER && item.getPaymentStatus().equals('Paid') && !item.getProgress().equals('Done')}">
                                                     <select name="change-serviceman">
@@ -124,12 +147,13 @@
                                                     </select>
                                                 </c:when>
                                                 <c:when test="${item.getServicemanEmail().equals('None') && item.getPrice() != 0.0 && item.getPaymentStatus().equals('Paid')}">
-                                                    <input type="submit" name="take-application" value="Take application">
+                                                    <input type="submit" name="take-application"
+                                                           value="Take application">
                                                 </c:when>
                                             </c:choose>
                                         </li>
                                         <li class="list-group-item">
-                                            ${progress}: ${item.getProgress()}
+                                                ${progress}: ${item.getProgress()}
                                             <c:if test="${u.getEmail().equals(item.getServicemanEmail())}">
                                                 <select name="change-progress">
                                                     <option>${item.getProgress()}</option>
@@ -147,15 +171,17 @@
                                     <input type="hidden" name="id" value="${item.getApplicationId()}">
                                     <input type="hidden" name="default-price" value="${item.getPrice()}">
                                     <input type="hidden" name="default-email" value="${item.getServicemanEmail()}">
-                                    <input type="hidden" name="default-payment-status" value="${item.getPaymentStatus()}">
+                                    <input type="hidden" name="default-payment-status"
+                                           value="${item.getPaymentStatus()}">
                                     <input type="hidden" name="default-progress" value="${item.getProgress()}">
 
-                                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">${modal_close}
+                                    <button type="reset" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">${modal_close}
                                     </button>
                                     <c:if test="${u.getRole() == Role.MANAGER
                                     || (item.getServicemanEmail().equals('None') && item.getPaymentStatus().equals('Paid'))
                                     || item.getServicemanEmail().equals(u.getEmail())}">
-                                    <button type="submit" class="btn btn-primary">${modal_save}</button>
+                                        <button type="submit" class="btn btn-primary">${modal_save}</button>
                                     </c:if>
                                 </div>
                             </form>
@@ -168,13 +194,15 @@
         </table>
     </c:otherwise>
 </c:choose>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <c:forEach var="i" begin="1" end="${numberOfPages}">
+            <li class="page-item"><a class="page-link" href="?page=${i}">${i}</a></li>
+        </c:forEach>
+    </ul>
+</nav>
+
 <my:footer/>
 </body>
 </html>
 
-
-<script>
-    $(document).ready(function () {
-        $('#applicationTable').dataTable();
-    });
-</script>

@@ -78,4 +78,16 @@ public class UserService {
         List<String> emails = servicemen.stream().map(User::getEmail).collect(Collectors.toList());
         return emails;
     }
+
+    /**
+     method getUserRecords gets a list of pagination user */
+    public static List<User> getUserRecords(int start, int total) {
+        return userDAO.getRecords(start, total);
+    }
+
+    /**
+     method getNumberOfRows returns number of rows in user table */
+    public static int getNumberOfRows() {
+        return userDAO.numberOfRows();
+    }
 }

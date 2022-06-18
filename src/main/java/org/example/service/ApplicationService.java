@@ -69,4 +69,22 @@ public class ApplicationService {
     public static void updateResponseText(int id, String response) {
         applicationDAO.updateApplicationResponseText(id, response);
     }
+
+    /**
+     method getUserRecords gets a list of pagination application */
+    public static List<Application> getRecords(int start, int total) {
+        return applicationDAO.getRecords(start, total);
+    }
+
+    /**
+     method getUserRecords gets a list of pagination application with sorting */
+    public static List<Application> getSortedRecords(int start, int total, String sortingBy) {
+        return applicationDAO.getSortedRecords(start, total, sortingBy);
+    }
+
+    /**
+     method getNumberOfRows returns number of rows in application table */
+    public static int getNumberOfRows() {
+        return applicationDAO.numberOfRows();
+    }
 }

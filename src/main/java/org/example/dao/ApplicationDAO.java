@@ -3,10 +3,7 @@ package org.example.dao;
 import org.slf4j.*;
 import org.example.models.Application;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,5 +171,144 @@ public class ApplicationDAO implements DAO<Application, String> {
             close(connection);
             close(psmt);
         }
+    }
+
+    public List<Application> getRecords(int start, int total) {
+        List<Application> list = new ArrayList<Application>();
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        try {
+            connection = getConnection();
+            psmt = connection.prepareStatement("select * from application limit " + (start - 1) + "," + total);
+            ResultSet result = psmt.executeQuery();
+            while (result.next()) {
+                Application application = Application.newBuilder().setApplicationId(result.getInt("application_id"))
+                        .setEmail(result.getString("email"))
+                        .setText(result.getString("text"))
+                        .setDate(result.getDate("date"))
+                        .setPrice(result.getDouble("price"))
+                        .setPaymentStatus(result.getString("payment_status"))
+                        .setProgress(result.getString("progress"))
+                        .setServicemanEmail(result.getString("serviceman_email"))
+                        .setResponseText(result.getString("response_text"))
+                        .build();
+                list.add(application);
+            }
+        } catch (Exception e) {
+        } finally {
+            close(connection);
+            close(psmt);
+        }
+        return list;
+    }
+
+    public int numberOfRows() {
+        int numberOfRows = 0;
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        try {
+            connection = getConnection();
+            psmt = connection.prepareStatement("SELECT COUNT(*) FROM application");
+            ResultSet result = psmt.executeQuery();
+            while (result.next()) {
+                numberOfRows = result.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
+        }
+        return numberOfRows;
+    }
+
+
+    public List<Application> getSortedRecords(int start, int total, String sortingBy) {
+        List<Application> list = new ArrayList<Application>();
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        try {
+            String query = "select * from application";
+            String fquery = "limit " + (start - 1) + "," + total;
+            connection = getConnection();
+
+            switch (sortingBy) {
+                case "idASC":
+                    psmt = connection.prepareStatement(query + " order by application_id asc " + fquery);
+                    break;
+                case "idDESC":
+                    psmt = connection.prepareStatement(query + " order by application_id desc " + fquery);
+                    break;
+                case "emailASC":
+                    psmt = connection.prepareStatement(query + " order by email asc " + fquery);
+                    break;
+                case "emailDESC":
+                    psmt = connection.prepareStatement(query + " order by email desc " + fquery);
+                    break;
+                case "textASC":
+                    psmt = connection.prepareStatement(query + " order by text asc " + fquery);
+                    break;
+                case "textDESC":
+                    psmt = connection.prepareStatement(query + " order by text desc " + fquery);
+                    break;
+                case "dateASC":
+                    psmt = connection.prepareStatement(query + " order by date asc " + fquery);
+                    break;
+                case "dateDESC":
+                    psmt = connection.prepareStatement(query + " order by date desc " + fquery);
+                    break;
+                case "servicemanASC":
+                    psmt = connection.prepareStatement(query + " order by serviceman_email asc " + fquery);
+                    break;
+                case "servicemanDESC":
+                    psmt = connection.prepareStatement(query + " order by serviceman_email desc " + fquery);
+                    break;
+                case "priceASC":
+                    psmt = connection.prepareStatement(query + " order by price asc " + fquery);
+                    break;
+                case "priceDESC":
+                    psmt = connection.prepareStatement(query + " order by price desc " + fquery);
+                    break;
+                case "pstatusASC":
+                    psmt = connection.prepareStatement(query + " order by paymnet_status asc " + fquery);
+                    break;
+                case "pstatusDESC":
+                    psmt = connection.prepareStatement(query + " order by paymnet_status desc " + fquery);
+                    break;
+                case "progressASC":
+                    psmt = connection.prepareStatement(query + " order by progress asc " + fquery);
+                    break;
+                case "progressDESC":
+                    psmt = connection.prepareStatement(query + " order by progress desc " + fquery);
+                    break;
+                case "responseASC":
+                    psmt = connection.prepareStatement(query + " order by response_text asc " + fquery);
+                    break;
+                case "responseDESC":
+                    psmt = connection.prepareStatement(query + " order by response_text desc " + fquery);
+                    break;
+
+            }
+
+            ResultSet result = psmt.executeQuery();
+            while (result.next()) {
+                Application application = Application.newBuilder().setApplicationId(result.getInt("application_id"))
+                        .setEmail(result.getString("email"))
+                        .setText(result.getString("text"))
+                        .setDate(result.getDate("date"))
+                        .setPrice(result.getDouble("price"))
+                        .setPaymentStatus(result.getString("payment_status"))
+                        .setProgress(result.getString("progress"))
+                        .setServicemanEmail(result.getString("serviceman_email"))
+                        .setResponseText(result.getString("response_text"))
+                        .build();
+                list.add(application);
+            }
+        } catch (Exception e) {
+        } finally {
+            close(connection);
+            close(psmt);
+        }
+        return list;
     }
 }

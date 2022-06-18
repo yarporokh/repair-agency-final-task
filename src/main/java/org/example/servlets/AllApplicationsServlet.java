@@ -8,11 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.models.Application;
 import org.example.models.User;
+import org.example.service.ApplicationService;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.example.service.ApplicationService.getAllApplications;
 import static org.example.service.ApplicationService.updateApplication;
 import static org.example.service.UserService.getServicemenEmailsList;
 
@@ -20,7 +20,6 @@ import static org.example.service.UserService.getServicemenEmailsList;
 public class AllApplicationsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Application> applicationList = getAllApplications();
         List<String> servicemenEmails = getServicemenEmailsList();
         HttpSession session = req.getSession();
         try {
@@ -30,8 +29,32 @@ public class AllApplicationsServlet extends HttpServlet {
         } catch (Exception e) {
 
         }
+
+        int pageid = 0;
+        try {
+            String spageid = req.getParameter("page");
+            pageid = Integer.parseInt(spageid);
+        } catch (Exception e) {
+            pageid = 1;
+        }
+
+        int total = 5;
+
+        if (pageid == 1) {
+        } else {
+            pageid = pageid - 1;
+            pageid = pageid * total + 1;
+        }
+
+        int totalPages = ApplicationService.getNumberOfRows() / total;
+        if (ApplicationService.getNumberOfRows() % total != 0)
+            totalPages++;
+
+        List<Application> list = ApplicationService.getRecords(pageid, total);
+
+        req.setAttribute("numberOfPages", totalPages);
         req.setAttribute("emails", servicemenEmails);
-        req.setAttribute("applicationList", applicationList);
+        req.setAttribute("applicationList", list);
         getServletContext().getRequestDispatcher("/allApplications.jsp").forward(req, resp);
     }
 
@@ -51,8 +74,8 @@ public class AllApplicationsServlet extends HttpServlet {
         if (servicemanEmail == null)
             servicemanEmail = req.getParameter("default-email");
 
-        if(req.getParameter("take-application") != null) {
-            try{
+        if (req.getParameter("take-application") != null) {
+            try {
                 HttpSession session = req.getSession();
                 User user = (User) session.getAttribute("user");
                 servicemanEmail = user.getEmail();

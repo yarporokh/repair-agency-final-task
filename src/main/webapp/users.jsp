@@ -113,13 +113,14 @@
         </table>
     </c:otherwise>
 </c:choose>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <c:forEach var="i" begin="1" end="${numberOfPages}">
+            <li class="page-item"><a class="page-link" href="?page=${i}">${i}</a></li>
+        </c:forEach>
+    </ul>
+</nav>
 <my:footer/>
 </body>
 </html>
 
-
-<script>
-    $(document).ready(function () {
-        $('#userTable').dataTable();
-    });
-</script>

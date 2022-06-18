@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.models.Application;
 import org.slf4j.*;
 import org.example.models.Role;
 import org.example.models.User;
@@ -198,5 +199,51 @@ public class UserDAO implements DAO<User, String> {
             close(psmt);
         }
         return "None";
+    }
+
+
+    public List<User> getRecords(int start, int total) {
+        List<User> list = new ArrayList<User>();
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        try {
+            connection = getConnection();
+            psmt = connection.prepareStatement("select * from user limit " + (start - 1) + "," + total);
+            ResultSet result = psmt.executeQuery();
+            while (result.next()) {
+                User user = User.newBuilder().setEmail(result.getString("email"))
+                        .setFirstName(result.getString("first_name"))
+                        .setLastName(result.getString("last_name"))
+                        .setBalance(result.getDouble("balance"))
+                        .setRole(Role.valueOf(result.getString("role")))
+                        .build();
+                list.add(user);
+            }
+        } catch (Exception e) {
+        } finally {
+            close(connection);
+            close(psmt);
+        }
+        return list;
+    }
+
+    public int numberOfRows() {
+        int numberOfRows = 0;
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        try {
+            connection = getConnection();
+            psmt = connection.prepareStatement("SELECT COUNT(*) FROM user");
+            ResultSet result = psmt.executeQuery();
+            while (result.next()) {
+                numberOfRows = result.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(psmt);
+        }
+        return  numberOfRows;
     }
 }
